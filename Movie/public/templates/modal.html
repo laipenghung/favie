@@ -1,0 +1,65 @@
+<div class="modal-body container-fluid d-none d-sm-block">
+	<div class="row h-100">
+		<div class="col-8 p-0">
+			<div class="embed-responsive embed-responsive-21by9 h-100">
+				<iframe class="embed-responsive-item" data-ng-src="{{trustSrc(trailerURL)}}"></iframe>
+			</div>
+		</div>
+		
+		<div class="col-4 modal-text">
+			<div class="row d-flex justify-content-end mt-1">
+				<button type="button" class="close" data-ng-click="ok()" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="row pr-5">
+				<h1 class="mt-3>{{data.title}}<hr></h1>
+			</div>
+			
+			<div class="row pr-5">
+				<h4><strong>Release Date:</strong> {{data.release_date}}</h4>
+			</div>
+			
+			<div class="row mt-3 pr-5">
+				<h4><strong>Overview</strong></h4>
+				<p class="my-2">{{data.overview}}</p>
+			</div>
+			
+			<div class="row">
+				<a href="#" data-ng-hide="isFavourite(data.id)" data-ng-click="addToFavourite(data.id)"><img src="https://img.icons8.com/cotton/32/000000/like--v3.png" alt="Favourite"/></a>
+				<a href="#" data-ng-show="isFavourite(data.id)" data-ng-click="removeFromFavourite(data.id)"><img src="https://img.icons8.com/cute-clipart/32/000000/delete-forever.png" alt="Remove"/></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-body container-fluid d-block d-sm-none" style="color:black">
+	<div class="row h-25" style="position:sticky; top:0; z-index: 2;">
+		<div class="embed-responsive embed-responsive-21by9">
+			<iframe class="embed-responsive-item" data-ng-src="{{trustSrc(trailerURL)}}"></iframe>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col modal-text">
+			<div class="row">
+				<h1 class="mt-3">{{data.title}}<hr></h1>
+			</div>
+			
+			<div class="row">
+				<h4><strong>Release Date:</strong> {{data.release_date}}</h4>
+			</div>
+			
+			<div class="row mt-3">
+				<h4><strong>Overview</strong></h4>
+				<p class="my-2">{{data.overview}}</p>
+			</div>
+			
+			<div class="row">
+				<a href="#" data-ng-hide="isFavourite(data.id)" data-ng-click="addToFavourite(data.id)"><img src="https://img.icons8.com/cotton/32/000000/like--v3.png" alt="Favourite"/></a>
+				<a href="#" data-ng-show="isFavourite(data.id)" data-ng-click="removeFromFavourite(data.id)"><img src="https://img.icons8.com/cute-clipart/32/000000/delete-forever.png" alt="Remove"/></a>
+			</div>
+		</div>
+	</div>
+</div>

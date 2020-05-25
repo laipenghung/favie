@@ -1,0 +1,153 @@
+<!DOCTYPE html> 
+<html lang="en" data-ng-app="myApp"> 
+<head> 
+	<meta charset="utf-8"/>
+	<title>Favie</title> 
+	<link rel="icon" href="/images/logo_mini.png">
+	<meta name="viewport" content="width=device-width, initialscale=1.0"/> 
+	<!-- Bootstrap --> 
+	<link href="/frameworks/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/frameworks/css/style.css" rel="stylesheet" />  	
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --> 
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// --> 
+	<!--[if lt IE 9]> 
+		<script src="js/html5shiv.js"></script> 
+		<script src="js/respond.min.js"></script> 
+	<![endif]--> 
+	<!--Social media button-->
+	<script src="https://kit.fontawesome.com/46f7c7318f.js" crossorigin="anonymous"></script>
+</head> 
+ 
+<body>
+	<header data-ng-controller="loginCtrl">
+		<nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg container-fluid">
+			<div class="container">
+				<a class="navbar-brand" href="#introduction">
+					<img src="/images/logo_normal.png" id="logo" class="d-inline-block align-top" alt="Brand Logo">
+					<a href="https://www.themoviedb.org/" target="_blank"><img src="/images/imdb_logo.svg" id="logo" class="d-inline-block align-top" alt="IMdb Logo"></a>
+				</a>
+				
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarContent" aria-controls="navBarContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<div class="collapse navbar-collapse" id="navBarContent">
+					<div class="navbar-nav">
+						<a class="nav-item nav-link ml-4" href="#!/popular" data-ng-click="goToPopular()">Popular</a>
+						<a class="nav-item nav-link ml-4" href="#!/nowPlaying" data-ng-click="goToNowPlaying()">Now Playing</a>
+						<a class="nav-item nav-link ml-4" href="#!/upcoming" data-ng-click="goToUpcoming()">Upcoming</a>
+						<a class="nav-item nav-link ml-4" href="#!/topRated" data-ng-click="goToTopRated()">Top rated</a>
+						
+						<div data-ng-controller="favouriteCtrl">
+							<a class="nav-item nav-link ml-4" href="#" data-ng-show="isLogin" data-ng-click="openModal()"><img src="https://img.icons8.com/cotton/32/000000/like--v3.png" alt="Favourite"/></a>
+						</div>
+						
+						<div class="form-inline">
+							<a class="nav-item nav-link ml-4" href="#login" data-toggle="modal" data-ng-hide="isLogin"><img src="https://img.icons8.com/officel/32/000000/user-male-circle.png" alt="Login"/></a>
+							<a class="nav-item nav-link ml-4" href="#" onclick="signOut()" data-ng-show="isLogin"><img src="https://img.icons8.com/dusk/32/000000/logout-rounded.png"/ alt="Sign Out"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="modal fade" id="login" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content bg-dark">
+					<div class="modal-header">
+						<h5 class="modal-title">Login with social account now!</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+							  <span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="row m-2">
+							<div class="btn btn-block btn-facebook" data-ng-click="accType('fb')"><i class="fab fa-facebook-f"></i>Login via Facebook</div>
+						</div>
+						
+						<div class="row m-2">
+							<div class="btn btn-block btn-google" data-ng-click="accType('google')"><i class="fab fa-google"></i>Login via Gmail</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+	<div class="content" data-ng-controller="ctrl">
+		<div class="jumbotron" id="introduction">
+			<h1>Welcome to FAVIE</h1>
+			<p class="lead">Finding movie?</p>
+			<p class="lead">Love movie?</p>
+			<p class="lead">We got the trending list of movie details here!</p>
+			<hr class="my-4">
+			<p>Sign up to add your favourite movie</p>
+			<button type="button" class="btn btn-info d-block d-sm-none" data-toggle="collapse" data-target="#navBarContent" aria-controls="navBarContent" aria-expanded="false" aria-label="Toggle navigation">
+				Click Me to browse!
+			</button>
+		</div>
+		
+		<div class="d-none d-sm-block" data-ng-repeat="template in templates">
+			<div class="sub-content" data-ng-include="template.url"></div>
+		</div>
+		
+		<div class="d-block d-sm-none">
+			<div class="sub-content" data-ng-view></div>
+		</div>
+	</div>
+	
+	<footer class="container-fluid">
+		<div class="row bg-dark">
+			<div class="col text-center">
+				<a href="#disclaimer" data-toggle="modal">Disclaimer</a>
+			</div>
+		</div>
+	</footer>
+	
+	<div class="modal fade" id="disclaimer" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content bg-dark">
+				<div class="modal-header">
+					<h5 class="modal-title">Disclaimer</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+						  <span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<ul>
+						<li>This website is created mainly for educational and non-commercial use only. It is a partial fulfilment for completion of unit COS30043 – Interface Design & Development offered in Swinburne University of Technology, Sarawak Campus for Semester 2, 2020.</li>
+						<li>The web-master, designer and developer does not represent the business entity. However, the web develop has obtained consent and approval from the business representative, Mr on 20/5/2020 to use their information and resources for the purpose of content development.</li>
+						<li>The content or information of this website might be out-dated or inaccurate, thus, the web-developer and web-master does not take any responsibility for incorrect information disseminate or cited from this website.</li>
+						<li>Visitors are advised to visit the official <a href="https://www.themoviedb.org/" target="_blank">website</a> to get the actual information</li>
+						<li>If you believe that information of any kind on this website is an infringement of copyright in material in which you either own copyright or are authorized to exercise the rights of a copyright owner, kindly contact the web-developer penghun99@gmail.com or web-master/Lecturer, Mr. Khairul Azim (kazim@swinburne.edu.my) for removal.</li>
+						<li style="color:red;">This product uses the TMDb API but is not endorsed or certified by TMDb.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="/__/firebase/7.14.3/firebase-app.js"></script>
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		 https://firebase.google.com/docs/web/setup#available-libraries -->
+	<!-- Initialize Firebase -->
+	<script src="/__/firebase/7.14.3/firebase-auth.js"></script>
+	<script src="/__/firebase/7.14.3/firebase-database.js"></script>
+	<script src="/__/firebase/init.js"></script>
+    <!-- jQuery, popper – required for Bootstrap's JavaScript plugins) --> 
+    <script src="/frameworks/js/jquery-3.5.1.min.js"></script>
+	<script src="/frameworks/js/popper.min.js"></script> 	
+    <!-- All Bootstrap  plug-ins  file --> 
+    <script src="/frameworks/js/bootstrap.min.js"></script> 
+	<!--AngularJS-->
+	<script src="/frameworks/js/angular.min.js"></script>
+	<!-- AngularJS - Routing --> 
+	<script src="/frameworks/js/angular-route.min.js"></script>
+	<!--Angular directives for Bootstrap-->
+	<script src="/frameworks/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+	<!--Configuration-->
+	<script src="/scripts/firebaseConfig.js"></script>
+	<script src="/scripts/myApp.js"></script>
+</body> 
+</html>

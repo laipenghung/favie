@@ -1,0 +1,46 @@
+<div class="container-fluid" id="popular" data-ng-controller="popularCtrl">
+	<div class="row d-none d-sm-block">
+		<div class="col">
+			<div class="row">
+				<div class="col">
+					<h1>Popular</h1>
+				</div>
+			</div>
+			
+			<div class="row justify-content-center align-self-center">
+				<div class="card col-2" data-ng-click="openModal(x.id)" data-ng-repeat="x in popular">
+					<img class="card-img-top" src="http://image.tmdb.org/t/p/w500/{{x.poster_path}}" alt="{{x.title}} Image">
+					<div class="card-body">
+						<h5 class="card-title">{{x.title}}</h5>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row justify-content-center align-self-center">
+				<ul uib-pagination data-total-items="totalItems" data-ng-model="currentPage" data-items-per-page="itemsPerPage" data-boundary-links-numbers="true"></ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="d-block d-sm-none">
+		<div class="row">
+			<div class="col text-center">
+				<h1>Popular</h1>
+			</div>
+		</div>
+		
+		<div class="row justify-content-center align-self-center" data-ng-click="openModal(x.id)" data-ng-repeat="x in popular">
+			<div class="col-4">
+				<img class="img-fluid" src="http://image.tmdb.org/t/p/w92/{{x.poster_path}}" alt="{{x.title}} Image">
+			</div>
+			<div class="col-8">
+				<h5 class="card-title">{{x.title}}</h5>
+				<p class="mobOverview">{{x.overview}}</p>
+			</div>
+		</div>
+
+		<div class="row justify-content-center align-self-center mb-5">
+			<ul uib-pagination data-total-items="totalItems" data-ng-model="currentPage" data-items-per-page="itemsPerPage" data-boundary-links-numbers="true"></ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,290 @@
+/*General setting*/
+	@font-face{
+		font-family: LoraFont;
+		src: url("../font/Lora/static/Lora-Regular.ttf");
+	}
+
+	html, body{
+		background-image: url("../../images/background.png");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		height: 100vh;
+		color: white;
+	}
+	body{
+		padding-top: 60px;
+	}
+
+	html{
+		scroll-behavior: smooth;
+		/* Hide scrollbar for IE and Edge */
+		-ms-overflow-style: none;
+	}
+
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	html::-webkit-scrollbar {
+		display: none;
+	}
+
+	.container-fluid{
+		padding: 0 !important;
+	}
+
+	.row{
+		margin: 0px;
+	}
+
+	#introduction, #popular, #nowPlaying, #upcoming, #topRated{
+		height: 100vh;
+	}
+
+	h1, h2, h3, h4, h5, p, .nav-link{
+		font-family: LoraFont;
+	}
+
+	footer{
+		position:fixed;
+		bottom: 0;
+	}
+/*General setting*/
+
+/*===========================================*/
+
+/*Text on different screen*/
+@media screen and (min-width: 576px){
+	.sub-content .container-fluid .row{
+		padding-top: 50px;
+	}
+	
+	.nav-link{
+		font-size: 1vw;
+	}
+	
+	#introduction h1, #popular h1, #nowPlaying h1, #upcoming h1, #topRated h1, #favouriteList h1{
+		font-size: 4vw;
+	}
+	
+	#introduction p{
+		font-size: 2vw;
+		margin-top: 3vh;
+	}
+	
+	.card-title{
+		font-size: 1.3vw;
+	}
+	
+	#login .modal-dialog{
+		width: 25%;
+		height: 25%;
+	}
+	
+	.modal-text{
+		color: black;
+		padding-left: 2%;
+	}
+	
+	.modal-text .row h1{
+		font-size: 2vw;
+	}
+	
+	.modal-text .row h4, .modal-text .row p{
+		font-size: 1vw;
+	}
+}
+
+@media screen and (min-device-width: 375px) and (max-device-width: 812px) and (orientation: landscape){
+	.sub-content .container-fluid .row{
+		padding: 0;
+	}
+	
+	.nav-link{
+		font-size: 1.5vw;
+	}
+	
+	#introduction h1, #popular h1, #nowPlaying h1, #upcoming h1, #topRated h1, #favouriteList h1{
+		font-size: 4vw;
+	}
+	
+	#introduction p{
+		font-size: 2vw;
+		margin-top: 3vh;
+	}
+	
+	.card-title{
+		font-size: 1.2vw;
+	}
+	
+	#login .modal-dialog{
+		width: 50%;
+		height: 50%;
+	}
+	
+	.modal-text{
+		color: black;
+		padding-left: 2%;
+	}
+	
+	.modal-text .row h1{
+		font-size: 2.3vw;
+	}
+	
+	.modal-text .row h4, .modal-text .row p{
+		font-size: 1.2vw;
+	}
+	
+	ul.pagination li.pagination-page a, ul.pagination li.pagination-prev a, ul.pagination li.pagination-next a{
+		font-size: 1.2vw;  
+	}
+}
+
+@media screen and (min-device-width: 375px) and (max-device-width: 812px) and (orientation: portrait) { 
+	.sub-content .container-fluid .row{
+		padding: 2%;
+	}
+	
+	#introduction{
+		height: 50vh;
+	}
+	
+	#login .modal-dialog{
+		width: 80%;
+		height: 35%;
+	}
+	
+	.mobOverview{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+/*Text on different screen*/
+
+/*===========================================*/
+
+/*Logo*/
+	#logo{
+		height: 50px;
+	}
+/*Logo*/
+
+/*===========================================*/
+
+/*Introduction part*/
+	#introduction{
+		background-image: url("../../images/background.png");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;	
+	}
+
+	#introduction hr{
+		background-color: white;
+	}
+/*Introduction end*/
+
+/*===========================================*/
+
+/*Pagination style*/
+	ul.pagination li.pagination-page {
+		border-radius: 10px;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	li.pagination-page.ng-scope.active{
+		background-color: #D50000;
+	}
+
+	li.pagination-page.ng-scope a{   
+		color:#999;
+	}
+
+	li.pagination-page.ng-scope.active a{   
+		color:#FFF;
+		font-weight:bold;
+	}
+
+	ul.pagination li.pagination-prev{
+		padding: 1vh 1vw;
+	}
+
+	ul.pagination li.pagination-page a, ul.pagination li.pagination-prev a, ul.pagination li.pagination-next a, footer a{
+		color:#F90;   
+	}
+
+	ul.pagination li.pagination-next{
+		padding: 1vh 1vw;
+	}
+
+	ul.pagination li{   
+		padding: 1vh 1vw;
+	}
+/*Pagination style*/
+
+/*===========================================*/
+
+/*Card style*/
+	.card{
+		padding: 1%;
+		background: rgba(0, 0, 0, 0);
+		border: 1px solid transparent;
+		transition: transform .2s;
+	}
+	
+	.card:hover{
+		cursor: pointer;
+		transform: scale(1.1);
+	}
+/*Card style*/
+
+/*===========================================*/
+
+/*Modal style*/
+	.modal-open .container-fluid{
+		filter: blur(5px);
+	}
+	
+	.modal .modal-dialog {
+		width: 98%;
+		height: 92%;
+		max-width: none;
+		margin: 1.5% auto;
+	}
+	
+	.modal .modal-content {
+		height: 99%;
+	}
+	
+	.modal .modal-body{
+		filter: blur(0);
+		overflow-y: auto;
+	}
+/*Modal style*/
+
+/*===========================================*/
+ 
+/*Social media button*/
+ 	.btn-facebook {
+		background-color: #405D9D;
+		color: #fff;
+	}
+	.btn-google {
+		background-color: #DD4B39;
+		color: #fff;
+	}
+	
+	.fab{
+		margin-right: 10px;
+	}
+/*Social media button*/
+ 
+/*===========================================*/
+  
+/*Favourite page*/
+#favouriteList{
+	height: 100%;
+	max-width: none;
+	width: 100%;
+}
+/*Favourite page*/
