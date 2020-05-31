@@ -19,6 +19,7 @@
 </head> 
  
 <body>
+	<!--Navbar section-->
 	<header data-ng-controller="loginCtrl">
 		<nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg container-fluid">
 			<div class="container">
@@ -28,7 +29,6 @@
 				<a class="navbar-brand" href="https://www.themoviedb.org/" target="_blank">
 					<img src="/images/imdb_logo.svg" class="logo d-inline-block align-top" alt="IMdb Logo"/>
 				</a>
-				
 				
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarContent" aria-controls="navBarContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -42,18 +42,25 @@
 						<a class="nav-item nav-link ml-4" href="#!/topRated" data-ng-click="goToTopRated()">Top rated</a>
 						
 						<div data-ng-controller="favouriteCtrl">
-							<a class="nav-item nav-link ml-4" href="#" data-ng-show="isLogin" data-ng-click="openModal()"><img src="https://img.icons8.com/cotton/32/000000/like--v3.png" alt="Favourite"/></a>
+							<a class="nav-item nav-link ml-4" href="#" data-ng-show="isLogin" data-ng-click="openModal()" title="Favourite"><img src="https://img.icons8.com/cotton/32/000000/like--v3.png" alt="Favourite"/></a>
 						</div>
 						
-						<div class="form-inline">
+						<!--Login/Sign out-->
+						<div class="form-inline dropdown">
 							<a class="nav-item nav-link ml-4" href="#login" data-toggle="modal" data-ng-hide="isLogin"><img src="https://img.icons8.com/officel/32/000000/user-male-circle.png" alt="Login"/></a>
-							<a class="nav-item nav-link ml-4" href="#" onclick="signOut()" data-ng-show="isLogin"><img src="https://img.icons8.com/dusk/32/000000/logout-rounded.png" alt="Sign Out"/></a>
+							<a class="nav-item nav-link dropdown-toggle ml-4" href="#" data-ng-show="isLogin" title="Setting" data-toggle="dropdown"><img src="https://img.icons8.com/dusk/32/000000/gear.png" alt="Setting" /></a>
+							
+							<div class="dropdown-menu bg-dark">
+								<a class="dropdown-item text-center" href="#feedback" data-toggle="modal" data-ng-show="isLogin" title="Feedback"><img class="pr-1" src="https://img.icons8.com/bubbles/32/000000/comments.png" alt="Feedback"/>Feedback</a>
+								<a class="dropdown-item text-center" href="#" onclick="signOut()" data-ng-show="isLogin" title="Sign out"><img class="pr-1" src="https://img.icons8.com/dusk/32/000000/logout-rounded.png" alt="Sign Out"/>Sign Out</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</nav>
 		
+		<!--Login section-->
 		<div class="modal fade" id="login" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content bg-dark">
@@ -75,9 +82,69 @@
 				</div>
 			</div>
 		</div>
+		
+		<!--Feedback section-->
+		<div class="modal fade" id="feedback" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content bg-dark">
+					<div class="modal-header">
+						<h5 class="modal-title">Feedback Form</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+							  <span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<p>1. Have you ever heard about FAVIE?</p>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="Site" id="YesRad" value="yes" checked>
+									<label class="form-check-label" for="YesRad">Yes</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="Site" id="NoRad" value="no">
+									<label class="form-check-label" for="NoRad">No</label>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="age">2. How old are you?</label>
+								<input class="form-control" type="number" id="age" name="age" min="1" placeholder="Enter age">
+							</div>
+							
+							<div class="form-group">
+								<p>3. Gender</p>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="Gender" id="MaleRad" value="male">
+									<label class="form-check-label" for="MaleRad">Male</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="Gender" id="FemaleRad" value="female">
+									<label class="form-check-label" for="FemaleRad">Female</label>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="likeReview">4. What particular aspect(s) of our website do you like?</label>
+								<textarea class="form-control" id="likeReview" name="likeReview" rows="4"></textarea>
+							</div>
+							
+							<div class="form-group">
+								<label for="dislikeReview">5. What particular aspect(s) of our website do you dislike?</label>
+								<textarea class="form-control" id="dislikeReview" name="dislikeReview" rows="4"></textarea>
+							</div>
+							<button type="submit" class="btn btn-primary">Send</button>
+							<button type="reset" class="btn btn-warning">Reset</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</header>
 	
+	<!--Content section-->
 	<div class="content" data-ng-controller="ctrl">
+		<!--Introduction section-->
 		<div class="jumbotron" id="introduction">
 			<h1>Welcome to FAVIE</h1>
 			<p class="lead">Finding movie?</p>
@@ -90,15 +157,18 @@
 			</button>
 		</div>
 		
+		<!--Wide screen content section-->
 		<div class="d-none d-sm-block" data-ng-repeat="template in templates">
 			<div class="sub-content" data-ng-include="template.url"></div>
 		</div>
 		
+		<!--Mobile screen content section-->
 		<div class="d-block d-sm-none">
 			<div class="sub-content" data-ng-view></div>
 		</div>
 	</div>
 	
+	<!--Disclaimer section-->
 	<footer class="container-fluid">
 		<div class="row bg-dark">
 			<div class="col text-center">

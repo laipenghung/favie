@@ -1,11 +1,12 @@
 var app = angular.module("myApp", ["ui.bootstrap", "ngRoute"]);
-var base = 'https://api.themoviedb.org/3';
-var service = '/movie/';
-var apiKey = '7818a329e35690a67516ba8b2cff71a6';
-var callback = 'JSON_CALLBACK';
+var base = "https://api.themoviedb.org/3";
+var service = "/movie/";
+var apiKey = "7818a329e35690a67516ba8b2cff71a6";
+var callback = "JSON_CALLBACK";
 var movieType = ["popular", "now_playing", "upcoming", "top_rated"];
 var db = firebase.database();
 
+//Favourite controller
 app.controller("favouriteCtrl", function($scope, $uibModal, userProperties){
 	$scope.openModal = function(){
 		var modalInstance = $uibModal.open({
@@ -21,12 +22,13 @@ app.controller("favouriteCtrl", function($scope, $uibModal, userProperties){
 	}
 });
 
+//Favourite modal
 app.controller("favModalCtrl", function($scope, $timeout, $http, data, $uibModal, $uibModalInstance){
 	var key = [];
 	$scope.data = [];
 	$timeout(function(){
 		for(var x=0; x<data.length; x++){
-			var url = base + service + data[x] + '?api_key=' + apiKey;
+			var url = base + service + data[x] + "?api_key=" + apiKey;
 			$http.get(url).then(function(response){
 				console.log(response.data.title);
 				key.push(response.data);
@@ -62,6 +64,7 @@ app.controller("favModalCtrl", function($scope, $timeout, $http, data, $uibModal
 	}
 });
 
+//Nav route
 app.config(["$routeProvider", function($routeProvider){
 	$routeProvider
 		.when("/popular", {
@@ -81,10 +84,11 @@ app.config(["$routeProvider", function($routeProvider){
 			controller: "topRatedCtrl"
 		})
 		.otherwise({
-			redirectTo: $routeProvider
+			redirectTo: "/"
 		});
 }]);
 
+//Template controller
 app.controller("ctrl", function($scope){	
 	$scope.templates = [
 	{name: "popular.html", url: "templates/popular.html"},
@@ -94,11 +98,12 @@ app.controller("ctrl", function($scope){
 	];
 });
 
+//Popular controller
 app.controller("popularCtrl", function($scope, $http, $uibModal){
 	var popular = [];
 	getPopular();
 	function getPopular(){
-		var url = base + service + movieType[0] + '?api_key=' + apiKey;
+		var url = base + service + movieType[0] + "?api_key=" + apiKey;
 		$http.get(url).then(function(response){
 			console.log(response.data.results);
 			for(var x=0; x<response.data.results.length; x++){
@@ -130,11 +135,12 @@ app.controller("popularCtrl", function($scope, $http, $uibModal){
 	}
 });
 
+//Now Playing controller
 app.controller("nowPlayingCtrl", function($scope, $http, $uibModal){
 	var nowPlaying = [];
 	getNowPlaying();
 	function getNowPlaying(){
-		var url = base + service + movieType[1] + '?api_key=' + apiKey;
+		var url = base + service + movieType[1] + "?api_key=" + apiKey;
 		$http.get(url).then(function(response){
 			console.log(response.data.results);
 			for(var x=0; x<response.data.results.length; x++){
@@ -166,12 +172,13 @@ app.controller("nowPlayingCtrl", function($scope, $http, $uibModal){
 	}
 });
 
+//Upcoming controller
 app.controller("upcomingCtrl", function($scope, $http, $uibModal){
 	var upcoming = [];
 	getUpcoming();
 	
 	function getUpcoming(){
-		var url = base + service + movieType[2] + '?api_key=' + apiKey;
+		var url = base + service + movieType[2] + "?api_key=" + apiKey;
 		$http.get(url).then(function(response){
 			console.log(response.data.results);
 			for(var x=0; x<response.data.results.length; x++){
@@ -203,12 +210,13 @@ app.controller("upcomingCtrl", function($scope, $http, $uibModal){
 	}
 });
 
+//Top Rated controller
 app.controller("topRatedCtrl", function($scope, $http, $uibModal){
 	var topRated = [];
 	getTopRated();
 	
 	function getTopRated(){
-		var url = base + service + movieType[3] + '?api_key=' + apiKey;
+		var url = base + service + movieType[3] + "?api_key=" + apiKey;
 		$http.get(url).then(function(response){
 			console.log(response.data.results);
 			for(var x=0; x<response.data.results.length; x++){
@@ -240,6 +248,7 @@ app.controller("topRatedCtrl", function($scope, $http, $uibModal){
 	}
 });
 
+//Open modal from card clicked
 function modalInstance(movieID, movieArr, $uibModal){
 	var id = movieID;
 	var modalInstance = $uibModal.open({
@@ -254,6 +263,7 @@ function modalInstance(movieID, movieArr, $uibModal){
 	});
 }
 
+//Get info about opened/selected mocie
 function getSelectedMovie(id, movieArr){
 	var selectedMovie;
 	for(var x=0; x<movieArr.length; x++){
@@ -264,8 +274,9 @@ function getSelectedMovie(id, movieArr){
 	return selectedMovie;
 }
 
+//Opened modal controller
 app.controller("modalCtrl", function($scope, $http, $uibModalInstance, data, $sce, userProperties){
-	var url = base + service + data.id + "/videos" + '?api_key=' + apiKey;
+	var url = base + service + data.id + "/videos" + "?api_key=" + apiKey;
 	var youtubeService = "https://www.youtube.com/embed/";
 	$scope.data = data;
 	$scope.trustSrc = function(src){
@@ -314,6 +325,7 @@ app.controller("modalCtrl", function($scope, $http, $uibModalInstance, data, $sc
 	}
 });
 
+//Login controller
 app.controller("loginCtrl", function($scope, userProperties, $anchorScroll){
 		var provider = null;
 		$scope.accType = function(accountType){
@@ -364,6 +376,7 @@ app.controller("loginCtrl", function($scope, userProperties, $anchorScroll){
 				else{
 					console.log("No user loging");
 					$scope.isLogin = false;
+					$scope.$apply();
 				}
 			});
 		}
@@ -378,6 +391,7 @@ app.controller("loginCtrl", function($scope, userProperties, $anchorScroll){
 	}
 );
 
+//User service
 app.service("userProperties", function(){
 	var userID = "";
 	var movieID = "";
@@ -398,6 +412,7 @@ app.service("userProperties", function(){
 	}
 });
 
+//Sign out function
 function signOut(){
 	firebase.auth().signOut().then(function(){
 		console.log("Sign-out success");
@@ -406,6 +421,7 @@ function signOut(){
 	});
 }
 
+//Get user favourite movie
 function userFavourite(userProperties){
 	var key = [];
 	var favouriteID = [];
