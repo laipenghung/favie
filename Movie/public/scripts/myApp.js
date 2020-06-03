@@ -354,6 +354,10 @@ app.controller("loginCtrl", function($scope, userProperties, $anchorScroll){
 			$anchorScroll("topRated");
 		}
 		
+		$scope.submitFeedback = function(){
+			console.log("test");
+		}
+		
 		function signInAcc(provider){
 			firebase.auth().signInWithPopup(provider).then(function(result){
 				console.log("Login successfull");
@@ -408,6 +412,20 @@ app.service("userProperties", function(){
 		},
 		setMovieID: function(mid){
 			movieID = mid;
+		}
+	}
+});
+
+
+//Form directive
+app.directive("formValidate", function(){
+	return{
+		require: "ngModel",
+		link: function(scope, elements, attributes, control){
+			control.$validators.myValidator = function(modelValue, viewValue){
+				var valid = (viewValue && viewValue.length > 5) || false;
+				return valid;
+			}
 		}
 	}
 });
