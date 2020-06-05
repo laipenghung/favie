@@ -94,7 +94,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form id="feedbackForm" name="feedbackForm" data-ng-submit="submitFeedback()">
+						<form id="feedbackForm" name="feedbackForm" data-ng-submit="feedbackForm.like.$valid && feedbackForm.dislike.$valid  && submitFeedback()">
 							<div class="form-group">
 								<p>1. Have you ever heard about FAVIE?</p>
 								<div class="form-check form-check-inline">
@@ -125,15 +125,15 @@
 							</div>
 							
 							<div class="form-group">
-								<label for="likeReview">4. What particular aspect(s) of our website do you like?</label>
+								<label for="likeReview">4. What particular aspect(s) of our website do you like? *</label>
 								<p class="invalid" data-ng-hide="feedbackForm.like.$valid"><small>Please enter more then 5 words</small></p>
-								<textarea data-ng-model="like" name="like" form-validate class="form-control" id="likeReview" name="likeReview" rows="4"></textarea>
+								<textarea data-ng-model="like" name="like" data-form-validate class="form-control" id="likeReview" rows="4"></textarea>
 							</div>
 							
 							<div class="form-group">
-								<label for="dislikeReview">5. What particular aspect(s) of our website do you dislike?</label>
+								<label for="dislikeReview">5. What particular aspect(s) of our website do you dislike? *</label>
 								<p class="invalid" data-ng-hide="feedbackForm.dislike.$valid"><small>Please enter more then 5 words</small></p>
-								<textarea data-ng-model="dislike" name="dislike" form-validate class="form-control" id="dislikeReview" name="dislikeReview" rows="4"></textarea>
+								<textarea data-ng-model="dislike" name="dislike" data-form-validate class="form-control" id="dislikeReview" rows="4"></textarea>
 							</div>
 							
 							<div class="row justify-content-center">
@@ -199,6 +199,7 @@
 						<li>Visitors are advised to visit the official <a href="https://www.themoviedb.org/" target="_blank">website</a> to get the actual information</li>
 						<li>If you believe that information of any kind on this website is an infringement of copyright in material in which you either own copyright or are authorized to exercise the rights of a copyright owner, kindly contact the web-developer penghun99@gmail.com or web-master/Lecturer, Mr. Khairul Azim (kazim@swinburne.edu.my) for removal.</li>
 						<li style="color:red;">This product uses the TMDb API but is not endorsed or certified by TMDb.</li>
+						<li>The API service is for those of you interested in using our movie, TV show or actor images and/or data in your application. Our API is a system we provide for you and your team to programmatically fetch and use our data and/or images.</li>
 					</ul>
 				</div>
 			</div>
