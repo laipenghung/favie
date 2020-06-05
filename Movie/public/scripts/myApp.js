@@ -355,7 +355,39 @@ app.controller("loginCtrl", function($scope, userProperties, $anchorScroll){
 		}
 		
 		$scope.submitFeedback = function(){
-			console.log("test");
+			var site = document.getElementsByName("Site");
+			var age = document.getElementById("age");
+			var gender = document.getElementsByName("Gender");
+			var like = document.getElementById("likeReview");
+			var dislike = document.getElementById("dislikeReview");
+			var data = [];
+			//add site visited
+			for (var x=0; x<site.length; x++){
+				if(site[x].checked){
+					data.push({site: site[x].value});
+					break;
+				}
+			}
+			//add age
+			data.push({age: age.value});
+			//add gender
+			for (var x=0; x<gender.length; x++){
+				if(gender[x].checked){
+					data.push({gender: gender[x].value});
+					break;
+				}
+			}
+			//add like comment
+			data.push({like: like.value});
+			//add dislike comment
+			data.push({dislike: dislike.value});
+			var merged = data.reduce(function(result, current){
+				for(var x in current){
+					result[x] = current[x];
+				}
+				return result;
+			}, {});
+			storeFeedback(merged);
 		}
 		
 		function signInAcc(provider){
@@ -389,6 +421,14 @@ app.controller("loginCtrl", function($scope, userProperties, $anchorScroll){
 			db.ref("users/" + user.uid).update({
 				username: user.displayName
 			});
+		}
+		
+		function storeFeedback(feedback){
+			db.ref("users/" + userProperties.getUserID() + "/feedback/").push({
+				feedback
+			});
+			alert("Send successfully");
+			$("#feedback").modal("hide");
 		}
 		
 		currentUser();
