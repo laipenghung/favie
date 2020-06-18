@@ -43,6 +43,12 @@
 		font-family: LoraFont;
 	}
 	
+	.card-title{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
 	.dropdown-item{
 		color: white;
 	}
